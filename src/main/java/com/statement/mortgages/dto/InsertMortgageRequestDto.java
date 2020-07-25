@@ -5,7 +5,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-public class InsertMortgageRequest {
+public class InsertMortgageRequestDto {
 
     @NotEmpty(message = "Cannot be empty")
     @NotNull(message = "Cannot be null")
@@ -19,10 +19,10 @@ public class InsertMortgageRequest {
 
     private Date offerDate;
 
-    public InsertMortgageRequest() {
+    public InsertMortgageRequestDto() {
     }
 
-    public InsertMortgageRequest(@NotEmpty @NotNull String mortgageId, Integer version, String offerId, String productId, Date offerDate) {
+    public InsertMortgageRequestDto(@NotEmpty @NotNull String mortgageId, Integer version, String offerId, String productId, Date offerDate) {
         this.mortgageId = mortgageId;
         this.version = version;
         this.offerId = offerId;
