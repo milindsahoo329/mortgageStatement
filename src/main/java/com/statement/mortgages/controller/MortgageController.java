@@ -21,15 +21,17 @@ public class MortgageController {
     @Autowired
     private MortgageRepository mortgageRepository;
 
-    @GetMapping("list")
+    // Get request to fetch all the tuples from the Storage
+    @GetMapping("listAll")
     @ResponseBody
     public Mortgage[] findAll() {
         return mortgageRepository.getMortgageList();
     }
 
-    @PostMapping("insert")
-    public  ResponseEntity<Object> insertMortgage( @RequestBody @Valid InsertMortgageRequest body){
-
+    // Post request to insert a tuple into the Storage
+    // Use the InsertMortgageRequest Dto to validate the request body params
+    @PostMapping("add")
+    public  ResponseEntity<Map> insertMortgage( @RequestBody @Valid InsertMortgageRequest body){
         Mortgage input = new Mortgage();
         input.setMortgageId(body.getMortgageId());
         input.setVersion(body.getVersion());
@@ -44,10 +46,11 @@ public class MortgageController {
 
         String mId = mortgageRepository.addMortgage(input);
 
-        return new ResponseEntity<>(HttpStatus.OK);
-
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    // Post request to retrieve the mortgages in a sorted manner taking input from the User
+    // on the field it needs to be sorted
     @PostMapping("retrieve")
     public  ResponseEntity<Map> retrieveMortgages( @RequestBody @Valid RetrieveListDto req ) {
 
@@ -71,6 +74,7 @@ public class MortgageController {
         return new ResponseEntity<Map>(result, HttpStatus.OK);
     }
 
+    // An endpoint that can be used to update the expiryFlags of the storage
     @PutMapping("updateExpiry")
     public void updateOfferExpiry(){
         mortgageRepository.updateOfferExpiry();

@@ -20,6 +20,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -64,11 +65,10 @@ public class MortgageControllerUnitTest {
         Mortgage m1 = new Mortgage("M1", 1, "OF-1", "P-1", new Date(), new Date() , false);
         when(mortgageRepository.addMortgage(any(Mortgage.class))).thenReturn(m1.getMortgageId());
 
-        InsertMortgageRequest m = new InsertMortgageRequest("M1",1,"OF2","P1",new Date());
-        ResponseEntity<Object> responseEntity = mortgageController.insertMortgage(m);
+        InsertMortgageRequest sample = new InsertMortgageRequest("M1",1,"OF2","P1",new Date());
+        ResponseEntity<Map> responseEntity = mortgageController.insertMortgage(sample);
 
-        assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
-        //assertThat(responseEntity.getHeaders().getLocation().getPath()).isEqualTo("/1");
+        assertThat(responseEntity.getStatusCodeValue()).isEqualTo(201);
     }
 
 
