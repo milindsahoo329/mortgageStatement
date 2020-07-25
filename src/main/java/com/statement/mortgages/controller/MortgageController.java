@@ -1,6 +1,6 @@
 package com.statement.mortgages.controller;
 
-import com.statement.mortgages.dto.InsertMortgageRequest;
+import com.statement.mortgages.dto.InsertMortgageRequestDto;
 import com.statement.mortgages.dto.RetrieveListDto;
 import com.statement.mortgages.model.Mortgage;
 import com.statement.mortgages.repository.MortgageRepository;
@@ -31,7 +31,7 @@ public class MortgageController {
     // Post request to insert a tuple into the Storage
     // Use the InsertMortgageRequest Dto to validate the request body params
     @PostMapping("add")
-    public  ResponseEntity<Map> insertMortgage( @RequestBody @Valid InsertMortgageRequest body){
+    public  ResponseEntity<Map> insertMortgage( @RequestBody @Valid InsertMortgageRequestDto body){
         Mortgage input = new Mortgage();
         input.setMortgageId(body.getMortgageId());
         input.setVersion(body.getVersion());

@@ -2,12 +2,11 @@ package com.example.mortgages;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import com.statement.mortgages.controller.MortgageController;
-import com.statement.mortgages.dto.InsertMortgageRequest;
+import com.statement.mortgages.dto.InsertMortgageRequestDto;
 import com.statement.mortgages.model.Mortgage;
 import com.statement.mortgages.repository.MortgageRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -16,9 +15,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 
@@ -65,7 +62,7 @@ public class MortgageControllerUnitTest {
         Mortgage m1 = new Mortgage("M1", 1, "OF-1", "P-1", new Date(), new Date() , false);
         when(mortgageRepository.addMortgage(any(Mortgage.class))).thenReturn(m1.getMortgageId());
 
-        InsertMortgageRequest sample = new InsertMortgageRequest("M1",1,"OF2","P1",new Date());
+        InsertMortgageRequestDto sample = new InsertMortgageRequestDto("M1",1,"OF2","P1",new Date());
         ResponseEntity<Map> responseEntity = mortgageController.insertMortgage(sample);
 
         assertThat(responseEntity.getStatusCodeValue()).isEqualTo(201);

@@ -3,7 +3,7 @@ package com.statement.mortgages.model;
 import java.util.Date;
 
 
-public class Mortgage {
+public class Mortgage implements Comparable<Mortgage> {
 
     private String mortgageId;
     private Integer version;
@@ -81,5 +81,10 @@ public class Mortgage {
 
     public void setOfferExpired(Boolean offerExpired) {
         this.offerExpired = offerExpired;
+    }
+
+    @Override
+    public int compareTo(Mortgage m) {
+        return this.getCreatedDate().compareTo(m.getCreatedDate());
     }
 }
