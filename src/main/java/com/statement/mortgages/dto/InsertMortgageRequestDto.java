@@ -1,6 +1,7 @@
 package com.statement.mortgages.dto;
 
 import javax.persistence.Entity;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -11,18 +12,23 @@ public class InsertMortgageRequestDto {
     @NotNull(message = "Cannot be null")
     private String mortgageId;
 
+    @NotNull(message = "Cannot be null")
+    @Min(value = 0, message = "The value must be positive")
     private Integer version;
 
+    @NotEmpty(message = "Cannot be empty")
     private String offerId;
 
+    @NotEmpty(message = "Cannot be empty")
     private String productId;
 
+    @NotEmpty(message = "Cannot be empty")
     private Date offerDate;
 
     public InsertMortgageRequestDto() {
     }
 
-    public InsertMortgageRequestDto(@NotEmpty @NotNull String mortgageId, Integer version, String offerId, String productId, Date offerDate) {
+    public InsertMortgageRequestDto(@NotEmpty(message = "Cannot be empty") @NotNull(message = "Cannot be null") String mortgageId, @NotNull(message = "Cannot be null") @Min(value = 0, message = "The value must be positive") Integer version, @NotEmpty(message = "Cannot be empty") String offerId, @NotEmpty(message = "Cannot be empty") String productId, @NotEmpty(message = "Cannot be empty") Date offerDate) {
         this.mortgageId = mortgageId;
         this.version = version;
         this.offerId = offerId;
