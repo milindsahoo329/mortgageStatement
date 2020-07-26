@@ -94,6 +94,8 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>business-layer-docker</finalName>
+
 	</build>
 
 </project>
