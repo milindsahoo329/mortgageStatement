@@ -5,7 +5,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-
+// Dto for insert mortgage
 public class InsertMortgageRequestDto {
 
     @NotNull(message = "Cannot be null")

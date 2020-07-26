@@ -3,6 +3,7 @@ package com.services.businesslayer.dto;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+// Dto for highest version api from Data layer
 public class MortgageHighestVersionDto {
     @NotEmpty(message = "Cannot be empty")
     @NotNull(message = "Cannot be null")

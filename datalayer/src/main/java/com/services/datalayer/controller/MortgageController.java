@@ -29,7 +29,7 @@ public class MortgageController {
     }
 
     // Post request to insert a tuple into the Storage
-    // Use the InsertMortgageRequest Dto to validate the request body params
+    // Use the AddUpdateMortgageDto Dto to validate the request body params
     @PostMapping("add")
     public ResponseEntity<Map> insertMortgage(@RequestBody @Valid AddUpdateMortgageDto body){
 
@@ -45,11 +45,21 @@ public class MortgageController {
 
         String mId = mortgageRepository.addMortgage(input);
         Map<String, Object> result = new HashMap<String,Object>();
-        result.put("success",true);
+        HttpStatus httpStatus;
 
-        return new ResponseEntity<Map>(result,HttpStatus.CREATED);
+        if(mId.equals("Exceeded")){
+            result.put("success",false);
+            httpStatus = HttpStatus.INSUFFICIENT_STORAGE;
+        } else {
+            result.put("success",true);
+            httpStatus = HttpStatus.CREATED;
+        }
+
+        return new ResponseEntity<Map>(result,httpStatus);
     }
 
+    // Post request to update the tuple from the Storage
+    // Use the AddUpdateMortgageDto Dto to validate the request body params
     @PostMapping("replace")
     public ResponseEntity<Map> updateMortgage(@RequestBody @Valid AddUpdateMortgageDto body){
 
@@ -79,14 +89,13 @@ public class MortgageController {
         return new ResponseEntity<Map>(result,HttpStatus.CREATED);
     }
 
-    // Post request to retrieve the mortgages in a sorted manner taking input from the User
-    // on the field it needs to be sorted
-
+    // Get request to retrieve the mortgages in a sorted manner by created Date
     @GetMapping("list/created_date")
     public  Mortgage[] retrieveMortgagesByCreatedDate() {
         return mortgageRepository.sortListByCreatedDate();
     }
 
+    // Get request to retrieve the mortgages in a sorted manner by offer Date
     @GetMapping("list/offer_date")
     public  Mortgage[] retrieveMortgagesByOfferDate() {
         return mortgageRepository.sortListByOfferDate();
@@ -98,17 +107,15 @@ public class MortgageController {
         mortgageRepository.updateOfferExpiry();
     }
 
+    // post request that returns the highest version in the storage for the mortgage id
     @PostMapping("find/highestVersion")
     public ResponseEntity<Map> getHighestVersionForMortgage(@RequestBody @Valid MortgageHighestVersionDto body){
-
         Integer version = mortgageRepository.getHighestVersionByMortgageById(body.getMortgageId());
 
         Map<String, Object> result = new HashMap<String,Object>();
         result.put("highest_version",version);
-
         return new ResponseEntity<Map>(result,HttpStatus.CREATED);
     }
-
 
     // Adding a exception handler for fields validated via @Valid
     @ResponseStatus(HttpStatus.BAD_REQUEST)

@@ -25,6 +25,7 @@ public class RetrieveMortgagesController {
         Object [] mortgageList;
         RestTemplate restTemplate = new RestTemplate();
 
+        // take input from the user to retrieve the records by the field name mentioned
         switch (req.getSortByType()){
             case "offer_date":
                 mortgageList = restTemplate.getForObject(root+"list/offer_date", Object[].class);

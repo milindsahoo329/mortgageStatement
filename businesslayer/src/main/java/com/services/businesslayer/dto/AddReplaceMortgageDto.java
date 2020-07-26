@@ -5,7 +5,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-public class AddMortgageDto {
+// Dto for add or replace mortgage tuple
+public class AddReplaceMortgageDto {
 
     @NotEmpty(message = "Cannot be empty")
     @NotNull(message = "Cannot be null")
@@ -27,10 +28,10 @@ public class AddMortgageDto {
 
     private Boolean offerExpired;
 
-    public AddMortgageDto() {
+    public AddReplaceMortgageDto() {
     }
 
-    public AddMortgageDto(@NotEmpty(message = "Cannot be empty") @NotNull(message = "Cannot be null") String mortgageId, @NotNull(message = "Cannot be null") @Min(value = 0, message = "The value must be positive") Integer version, @NotEmpty(message = "Cannot be empty") String offerId, @NotEmpty(message = "Cannot be empty") String productId, Date offerDate, Date createdDate, Boolean offerExpired) {
+    public AddReplaceMortgageDto(@NotEmpty(message = "Cannot be empty") @NotNull(message = "Cannot be null") String mortgageId, @NotNull(message = "Cannot be null") @Min(value = 0, message = "The value must be positive") Integer version, @NotEmpty(message = "Cannot be empty") String offerId, @NotEmpty(message = "Cannot be empty") String productId, Date offerDate, Date createdDate, Boolean offerExpired) {
         this.mortgageId = mortgageId;
         this.version = version;
         this.offerId = offerId;
