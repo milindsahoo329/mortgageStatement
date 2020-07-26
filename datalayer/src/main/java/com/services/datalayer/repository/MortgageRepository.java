@@ -10,11 +10,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+
+// Provide
 @Repository
 public class MortgageRepository {
 
     // Using an array to store the data as Collections are not allowed for the problem statement
     private static Mortgage[] mortgageList = new Mortgage[100];
+
+    // Keeps count of storage
     static int count = 0;
 
 
@@ -42,9 +46,14 @@ public class MortgageRepository {
     }
 
     public String addMortgage(Mortgage mortgage){
-         mortgageList[count] = mortgage;
-         count++;
-         return mortgage.getMortgageId();
+        //Handling maximum count of the storage
+        if(count == 100){
+            return "Exceeded";
+        } else {
+            mortgageList[count] = mortgage;
+            count++;
+            return mortgage.getMortgageId();
+        }
     }
 
     public Integer updateMortgage(Mortgage mortgage){

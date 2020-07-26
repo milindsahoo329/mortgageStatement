@@ -2,6 +2,7 @@ package com.services.datalayer.model;
 
 import java.util.Date;
 
+// Signifies a record/tuple in the Data Storage
 public class Mortgage implements Comparable<Mortgage> {
 
     private String mortgageId;

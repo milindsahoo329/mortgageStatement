@@ -1,5 +1,6 @@
 package com.services.businesslayer.dto;
 
+// Data for retrieve mortgage list
 public class RetrieveMortgagesDto {
 
     private String sortByType;
