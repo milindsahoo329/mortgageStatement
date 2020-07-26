@@ -1,6 +1,7 @@
 package com.services.businesslayer.controller;
 
 import com.services.businesslayer.dto.RetrieveMortgagesDto;
+import com.services.businesslayer.exceptions.RestTemplateErrorHandler;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,6 +25,7 @@ public class RetrieveMortgagesController {
 
         Object [] mortgageList;
         RestTemplate restTemplate = new RestTemplate();
+        restTemplate.setErrorHandler(new RestTemplateErrorHandler());
 
         // take input from the user to retrieve the records by the field name mentioned
         switch (req.getSortByType()){

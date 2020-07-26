@@ -1,5 +1,6 @@
 package com.services.businesslayer.controller;
 
+import com.services.businesslayer.exceptions.RestTemplateErrorHandler;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ public class UpdateExpiryController {
     public ResponseEntity<Map> updateOfferExpiry(){
 
         RestTemplate restTemplate = new RestTemplate();
+        restTemplate.setErrorHandler(new RestTemplateErrorHandler());
         HttpHeaders headers = new HttpHeaders();
         HttpEntity<Object> entity = new HttpEntity<Object>(headers);
         restTemplate.exchange(root, HttpMethod.PUT, entity, String.class).getBody();
