@@ -3,6 +3,8 @@ package com.services.businesslayer.controller;
 import com.services.businesslayer.dto.AddReplaceMortgageDto;
 import com.services.businesslayer.dto.InsertMortgageRequestDto;
 import com.services.businesslayer.dto.MortgageHighestVersionDto;
+import com.services.businesslayer.exceptions.OfferDateLessException;
+import com.services.businesslayer.exceptions.RestTemplateErrorHandler;
 import com.services.businesslayer.utils.ManipulateDates;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +37,8 @@ public class InsertMortgageController {
         // check if offer date is less than current date + 6 months, reject if true
         if(dateAfter6months.before(body.getOfferDate()) == true) {
 
+            restTemplate.setErrorHandler(new RestTemplateErrorHandler());
+
             AddReplaceMortgageDto input = new AddReplaceMortgageDto();
 
             input.setMortgageId(body.getMortgageId());
@@ -66,8 +70,7 @@ public class InsertMortgageController {
 
         } else {
 
-            result.put("success",false);
-            httpStatus = HttpStatus.NOT_ACCEPTABLE;
+            throw new OfferDateLessException();
 
         }
 
