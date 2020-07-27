@@ -6,6 +6,7 @@ import com.services.datalayer.controller.MortgageController;
 import com.services.datalayer.dto.AddUpdateMortgageDto;
 import com.services.datalayer.model.Mortgage;
 import com.services.datalayer.repository.MortgageRepository;
+import com.services.datalayer.services.InsertMortgageService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -31,6 +32,9 @@ public class MortgageControllerUnitTest {
 
     @Mock
     MortgageRepository mortgageRepository;
+
+    @Mock
+    InsertMortgageService insertMortgageService;
 
     @Test
     public void testFindAll() throws ParseException {
@@ -61,7 +65,7 @@ public class MortgageControllerUnitTest {
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
         Mortgage m1 = new Mortgage("M1", 1, "OF-1", "P-1", new Date(), new Date() , false);
-        when(mortgageRepository.addMortgage(any(Mortgage.class))).thenReturn(m1.getMortgageId());
+        when(insertMortgageService.insertOneMortgageRecord(any(Mortgage.class))).thenReturn(m1.getMortgageId());
 
         AddUpdateMortgageDto sample = new AddUpdateMortgageDto("M1",1,"OF2","P1",new Date(),new Date(),true);
         ResponseEntity<Map> responseEntity = mortgageController.insertMortgage(sample);
