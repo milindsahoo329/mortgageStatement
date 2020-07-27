@@ -1,15 +1,12 @@
 package com.services.datalayer.repository;
 
-
 import com.services.datalayer.model.Mortgage;
-import com.services.datalayer.utils.ManipulateDates;
 import org.springframework.stereotype.Repository;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
 
 // Provide
 @Repository
@@ -21,7 +18,7 @@ public class MortgageRepository {
     // Keeps count of storage
     static int count = 0;
 
-
+    //Constructor with a few default initializations
     public MortgageRepository() throws ParseException {
         //Adding some static records in the Storage
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -45,14 +42,14 @@ public class MortgageRepository {
         return tempList;
     }
 
-    public String addMortgage(Mortgage mortgage){
+    public Boolean addMortgage(Mortgage mortgage){
         //Handling maximum count of the storage
         if(count == 100){
-            return "Exceeded";
+            return false;
         } else {
             mortgageList[count] = mortgage;
             count++;
-            return mortgage.getMortgageId();
+            return true;
         }
     }
 
