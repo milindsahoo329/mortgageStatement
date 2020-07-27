@@ -8,3 +8,4 @@ the relevant operations (Business Layer) that run on 9001 and 9002
 - Sorting and saving of records in Data Layer
 - Basic unit test cases on basic end points using Junit5
 - Docker build commands for the two microservices
+- Add openapi ui dependency to view the apis in each application
