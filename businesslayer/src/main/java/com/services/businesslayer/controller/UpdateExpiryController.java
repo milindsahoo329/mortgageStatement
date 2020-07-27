@@ -1,6 +1,8 @@
 package com.services.businesslayer.controller;
 
 import com.services.businesslayer.exceptions.RestTemplateErrorHandler;
+import com.services.businesslayer.services.UpdateExpiryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,21 +16,15 @@ import java.util.Map;
 @RequestMapping("/mortgage/")
 public class UpdateExpiryController {
 
-    private static final String root = "http://localhost:9001/updateExpiry";
+    @Autowired
+    UpdateExpiryService updateExpiryService;
 
-    // An endpoint that can be used to update the expiryFlags of the storage
+    // An endpoint that can be used to update the expiry flags of the storage
     @PutMapping("updateExpiry")
     public ResponseEntity<Map> updateOfferExpiry(){
 
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.setErrorHandler(new RestTemplateErrorHandler());
-        HttpHeaders headers = new HttpHeaders();
-        HttpEntity<Object> entity = new HttpEntity<Object>(headers);
-        restTemplate.exchange(root, HttpMethod.PUT, entity, String.class).getBody();
-
-        Map<String, Object> result = new HashMap<String,Object>();
-        result.put("success",true);
-        return new ResponseEntity<Map>(result, HttpStatus.CREATED);
+        Map result = updateExpiryService.updateOfferExpiryValues();
+        return new ResponseEntity<Map>(result, HttpStatus.OK);
 
     }
 

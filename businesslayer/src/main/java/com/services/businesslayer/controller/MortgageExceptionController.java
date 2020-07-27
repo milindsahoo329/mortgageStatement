@@ -1,5 +1,9 @@
-package com.services.businesslayer.exceptions;
+package com.services.businesslayer.controller;
 
+import com.services.businesslayer.exceptions.CustomNotFoundException;
+import com.services.businesslayer.exceptions.CustomServerException;
+import com.services.businesslayer.exceptions.HigherVersionFoundException;
+import com.services.businesslayer.exceptions.OfferDateLessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -20,5 +24,10 @@ public class MortgageExceptionController {
     @ExceptionHandler(value = CustomServerException.class)
     public ResponseEntity<Object> exception(CustomServerException exception) {
         return new ResponseEntity<>("Data layer threw an error", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(value = HigherVersionFoundException.class)
+    public ResponseEntity<Object> exception(HigherVersionFoundException exception) {
+        return new ResponseEntity<>("Higher Version for the Mortgage Id already present", HttpStatus.EXPECTATION_FAILED);
     }
 }

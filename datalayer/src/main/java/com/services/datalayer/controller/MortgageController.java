@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/trial")
+@RequestMapping("/")
 public class MortgageController {
 
     @Autowired
