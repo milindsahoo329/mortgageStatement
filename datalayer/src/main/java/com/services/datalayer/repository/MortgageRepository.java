@@ -59,7 +59,7 @@ public class MortgageRepository {
     public Integer updateMortgage(Mortgage mortgage){
         Integer index = getMortgageByIdAndVersion(mortgage.getMortgageId(),mortgage.getVersion());
         if((int)index != -1){
-            mortgageList[count] = mortgage;
+            mortgageList[index] = mortgage;
         }
         return index;
     }
