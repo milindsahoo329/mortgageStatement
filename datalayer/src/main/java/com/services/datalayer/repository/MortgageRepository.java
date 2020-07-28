@@ -2,14 +2,18 @@ package com.services.datalayer.repository;
 
 import com.services.datalayer.exceptions.StorageExceededException;
 import com.services.datalayer.model.Mortgage;
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import java.lang.invoke.MethodHandles;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-// Provide
+@Slf4j
 @Repository
 public class MortgageRepository {
 
@@ -17,24 +21,14 @@ public class MortgageRepository {
     private static Mortgage[] mortgageList = new Mortgage[100];
 
     // Keeps count of storage
-    static int count = 0;
+    static int count;
+
+    private final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     //Constructor with a few default initializations
     public MortgageRepository() throws ParseException {
         //Adding some static records in the Storage
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-
-        String dateStr = "2020-05-05", dateCreatedStr = "2020-03-02";
-        Date dummyOfferDate = (Date)formatter.parse(dateStr);
-        Date dummyCreatedDate = (Date)formatter.parse(dateCreatedStr);
-        Mortgage m1 = new Mortgage("M1", 1, "OF-1", "P-1", dummyOfferDate, dummyCreatedDate , false);
-        mortgageList[count++]=m1;
-
-        dateStr = "2021-12-05"; dateCreatedStr = "2021-07-05";
-        dummyOfferDate = (Date)formatter.parse(dateStr);
-        dummyCreatedDate = (Date)formatter.parse(dateCreatedStr);
-        Mortgage m2 = new Mortgage("M2", 1, "OF-1", "P-1", dummyOfferDate ,dummyCreatedDate , false);
-        mortgageList[count++]=m2;
+        addStaticValuesForStorage();
     }
 
     public Mortgage[] getMortgageList(){
@@ -112,6 +106,23 @@ public class MortgageRepository {
         Mortgage[] tempList = Arrays.copyOfRange(mortgageList, 0, count);
         Arrays.sort(tempList);
         return tempList;
+    }
+
+    public void addStaticValuesForStorage() throws ParseException {
+
+        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        String dateStr = "2020-05-05", dateCreatedStr = "2020-03-02";
+        Date dummyOfferDate = (Date)formatter.parse(dateStr);
+        Date dummyCreatedDate = (Date)formatter.parse(dateCreatedStr);
+        Mortgage m1 = new Mortgage("M1", 1, "OF-1", "P-1", dummyOfferDate, dummyCreatedDate , false);
+        mortgageList[count++]=m1;
+
+        dateStr = "2021-12-05"; dateCreatedStr = "2021-07-05";
+        dummyOfferDate = (Date)formatter.parse(dateStr);
+        dummyCreatedDate = (Date)formatter.parse(dateCreatedStr);
+        Mortgage m2 = new Mortgage("M2", 1, "OF-1", "P-1", dummyOfferDate ,dummyCreatedDate , false);
+        mortgageList[count++]=m2;
     }
 
 }
