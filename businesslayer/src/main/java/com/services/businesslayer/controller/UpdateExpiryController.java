@@ -1,15 +1,12 @@
 package com.services.businesslayer.controller;
 
-import com.services.businesslayer.exceptions.RestTemplateErrorHandler;
 import com.services.businesslayer.services.UpdateExpiryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
-import java.util.HashMap;
 import java.util.Map;
 
 @RestController

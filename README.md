@@ -8,6 +8,7 @@
 - Sorting of records achieved using Comparable interface and Comparator function
 - Sample Unit Test cases written for the controller
 - dockerfile maintained for the microservice
+- CustomExceptionHandler added for handling server exceptions
 
 
 # BusinessLayer

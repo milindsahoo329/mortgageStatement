@@ -12,13 +12,7 @@ public class InsertMortgageService {
     MortgageRepository mortgageRepository;
 
     public String insertOneMortgageRecord(Mortgage mortgage){
-        String result;
         Boolean mId = mortgageRepository.addMortgage(mortgage);
-        if(mId == true){
-            result = mortgage.getMortgageId();
-        } else {
-            result = "Exceeded";
-        }
-        return result;
+        return mortgage.getMortgageId();
     }
 }
