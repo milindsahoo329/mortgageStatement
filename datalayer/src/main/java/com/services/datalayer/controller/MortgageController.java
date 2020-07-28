@@ -56,19 +56,10 @@ public class MortgageController {
         input.setOfferExpired(body.getOfferExpired());
 
         String mId = insertMortgageService.insertOneMortgageRecord(input);
-        Map<String, Object> result = new HashMap<String,Object>();
-        HttpStatus httpStatus;
+        Map result = new HashMap<>();
+        result.put("success",true);
 
-        if(mId.equals("Exceeded")){
-            // Add exception
-            result.put("success",false);
-            httpStatus = HttpStatus.INSUFFICIENT_STORAGE;
-        } else {
-            result.put("success",true);
-            httpStatus = HttpStatus.CREATED;
-        }
-
-        return new ResponseEntity<Map>(result,httpStatus);
+        return new ResponseEntity<Map>(result,HttpStatus.CREATED);
     }
 
     // Post request to update the tuple from the Storage
@@ -87,19 +78,10 @@ public class MortgageController {
         input.setOfferExpired(body.getOfferExpired());
 
         Boolean flag = updateMortgageService.updateMortgageRecord(input);
-        Map<String, Object> result = new HashMap<String,Object>();
-        HttpStatus httpStatus;
+        Map result = new HashMap<>();
+        result.put("success",true);
 
-        if(flag == true){
-            result.put("success",true);
-            httpStatus = HttpStatus.CREATED;
-        }
-        else {
-            result.put("success",false);
-            httpStatus = HttpStatus.NOT_ACCEPTABLE;
-        }
-
-        return new ResponseEntity<Map>(result,httpStatus);
+        return new ResponseEntity<Map>(result,HttpStatus.OK);
     }
 
     // Get request to retrieve the mortgages in a sorted manner by created Date

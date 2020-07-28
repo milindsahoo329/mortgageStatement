@@ -1,5 +1,6 @@
 package com.services.datalayer.services;
 
+import com.services.datalayer.exceptions.RecordNotFoundException;
 import com.services.datalayer.model.Mortgage;
 import com.services.datalayer.repository.MortgageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class UpdateMortgageService {
             return true;
         }
         else {
-            return false;
+            throw new RecordNotFoundException();
         }
     }
 

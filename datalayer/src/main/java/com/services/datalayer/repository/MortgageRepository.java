@@ -1,5 +1,6 @@
 package com.services.datalayer.repository;
 
+import com.services.datalayer.exceptions.StorageExceededException;
 import com.services.datalayer.model.Mortgage;
 import org.springframework.stereotype.Repository;
 
@@ -45,7 +46,7 @@ public class MortgageRepository {
     public Boolean addMortgage(Mortgage mortgage){
         //Handling maximum count of the storage
         if(count == 100){
-            return false;
+            throw new StorageExceededException();
         } else {
             mortgageList[count] = mortgage;
             count++;
