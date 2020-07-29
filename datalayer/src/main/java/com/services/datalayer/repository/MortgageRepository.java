@@ -25,6 +25,10 @@ public class MortgageRepository {
 
     private final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
+    public static int getCount() {
+        return count;
+    }
+
     //Constructor with a few default initializations
     public MortgageRepository() throws ParseException {
         //Adding some static records in the Storage
@@ -58,13 +62,18 @@ public class MortgageRepository {
 
     // Update the flag - offer expiry if offer date is past today's date
     public String updateOfferExpiry(){
-        Date now = new Date();
-        for(Mortgage m : mortgageList){
-            if(m != null && m.getOfferDate().before(now)){
-                m.setOfferExpired(true);
+        try {
+            Date now = new Date();
+            for(Mortgage m : mortgageList){
+                if(m != null && m.getOfferDate().before(now)){
+                    m.setOfferExpired(true);
+                }
             }
+            return "Success";
+        } catch (Exception e){
+            return "Unsuccessful";
         }
-        return "Success";
+
     }
 
     // Get highest version by mortgage id
