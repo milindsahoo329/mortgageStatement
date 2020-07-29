@@ -9,6 +9,7 @@
 - Sample Unit Test cases written for the controller
 - dockerfile maintained for the microservice
 - CustomExceptionHandler added for handling server exceptions
+- add a sample RMI that is called by the BusinessLayer
 
 
 # BusinessLayer
